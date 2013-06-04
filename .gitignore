@@ -8,6 +8,6 @@
 /bin/
 /composer.phar
 /.idea/*
-/css/
-/js/
-/img/
+/web/css/
+/web/js/
+/web/img/
