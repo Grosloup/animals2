@@ -18,6 +18,11 @@
             <div class="span12">
                 <h3>Gestion des types d'événement</h3>
                 <p><a href="">Créer un type d'événement <i class="icon-chevron-right"></i></a></p>
+                {% if event_types|length > 0 %}
+
+                {% else %}
+                    <p class="well">Pas de types d'événement enregistrés.</p>
+                {% endif %}
             </div>
         </div>
         <div id="iucn" class="row">
