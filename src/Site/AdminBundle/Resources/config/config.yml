@@ -1,0 +1,18 @@
+parameters:
+    status:
+        - "présent"
+        - "parti"
+        - "déplacé"
+        - "décédé"
+    iucn:
+        - {initial: "LC", name: "least concern", name_fr: "menace faible"}
+        - {initial: "NT", name: "near threatened", name_fr: "très menacée"}
+        - {initial: "VU", name: "vulnerable", name_fr: "vulnérable"}
+        - {initial: "EN", name: "endangered", name_fr: "en danger"}
+        - {initial: "CR", name: "critically endangered", name_fr: "danger critique d'extinction"}
+        - {initial: "EW", name: "extinct in the wild", name_fr: "disparue dans la nature"}
+        - {initial: "EX", name: "extinct", name_fr: "disparue"}
+    sexes:
+        - "mâle"
+        - "femelle"
+        - "inconnu"

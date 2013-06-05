@@ -8,12 +8,19 @@
 namespace Site\AdminBundle\Controller;
 
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-class MiscController extends Controller
+class MiscController extends BaseController
 {
     public function indexAction()
     {
-        return $this->render("AdminBundle:Misc:index.html.twig");
+        $colors = $this->getRepo("AdminBundle:Color")->findAll();
+        $iucns = [];
+        if($this->container->hasParameter("iucn")){
+            $iucns = $this->container->getParameter("iucn");
+        }
+        $sexes = [];
+        if($this->container->hasParameter("sexes")){
+            $sexes = $this->container->getParameter("sexes");
+        }
+        return $this->render("AdminBundle:Misc:index.html.twig", ["colors"=>$colors, "iucns"=>$iucns, "sexes"=>$sexes]);
     }
 }

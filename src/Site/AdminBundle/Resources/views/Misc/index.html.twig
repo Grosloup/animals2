@@ -5,26 +5,61 @@
         <div class="row" id="colors">
             <div class="span12">
                 <h3>Gestion des couleurs</h3>
+                <p><a href="">Créer une couleur <i class="icon-chevron-right"></i></a></p>
+                {% if colors|length > 0 %}
+
+                {% else %}
+                    <p class="well">Pas de couleurs enregistrées.</p>
+                {% endif %}
+
             </div>
         </div>
         <div id="eventtypes" class="row">
             <div class="span12">
                 <h3>Gestion des types d'événement</h3>
+                <p><a href="">Créer un type d'événement <i class="icon-chevron-right"></i></a></p>
             </div>
         </div>
         <div id="iucn" class="row">
             <div class="span12">
-                <h3>Liste IUCN</h3>
-            </div>
-        </div>
-        <div id="weights" class="row">
-            <div class="span12">
-                <h3>Gestion des poids</h3>
+                <h3>Liste <abbr title="Union internationale pour la conservation de la nature">IUCN</abbr></h3>
+                {% if iucns|length > 0 %}
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Initiales</th>
+                        <th>Nom Anglais</th>
+                        <th>Nom français</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for iucn in iucns %}
+                        <tr>
+                            <td>{{ iucn.initial }}</td>
+                            <td>{{ iucn.name }}</td>
+                            <td>{{ iucn.name_fr }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p class="well">Status <abbr title="Union internationale pour la conservation de la nature">IUCN</abbr> non configurés.</p>
+                {% endif %}
             </div>
         </div>
         <div id="sexes" class="row">
             <div class="span12">
                 <h3>Liste des sexes</h3>
+                {% if sexes|length > 0 %}
+                    <p>{{ sexes|join(", ") }}</p>
+                {% else %}
+                    <p class="well">Sexes non configurés</p>
+                {% endif %}
+            </div>
+        </div>
+        <div id="weights" class="row">
+            <div class="span12">
+                <h3>Gestion des poids</h3>
             </div>
         </div>
     </div>
