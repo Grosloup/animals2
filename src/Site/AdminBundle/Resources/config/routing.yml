@@ -6,3 +6,38 @@ admin_homepage:
 admin_misc_homepage:
     pattern: /admin/misc
     defaults: { _controller: AdminBundle:Misc:index }
+
+admin_misc_color_index:
+    pattern: /admin/misc/color
+    defaults: { _controller: AdminBundle:Color:index }
+admin_misc_color_show:
+    pattern: /admin/misc/color/{id}/show
+    defaults: { _controller: AdminBundle:Color:show }
+    requirements:
+        id: \d+
+admin_misc_color_new:
+    pattern: /admin/misc/color/new
+    defaults: { _controller: AdminBundle:Color:new }
+admin_misc_color_create:
+    pattern: /admin/misc/color/create
+    defaults: { _controller: AdminBundle:Color:create }
+    requirements:
+        _method: post
+admin_misc_color_edit:
+    pattern: /admin/misc/color/{id}/edit
+    defaults: { _controller: AdminBundle:Color:edit }
+    requirements:
+        id: \d+
+admin_misc_color_update:
+    pattern: /admin/misc/color/{id}/update
+    defaults: { _controller: AdminBundle:Color:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_misc_color_delete:
+    pattern: /admin/misc/color/{id}/delete
+    defaults: { _controller: AdminBundle:Color:delete }
+    requirements:
+        id: \d+
+        _method: delete|post
+
