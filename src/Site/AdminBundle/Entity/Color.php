@@ -121,4 +121,9 @@ class Color
     {
         return $this->background;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
