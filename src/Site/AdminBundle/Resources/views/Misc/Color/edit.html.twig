@@ -45,6 +45,16 @@
                 </form>
             </div>
         </div>
+        <div class="row">
+            <div class="span6 offset3">
+                <h4>Supprimer cette couleur</h4>
+                <form action="{{ path("admin_misc_color_delete",{"id":entity.id}) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+                    {{ form_widget(delete_form) }}
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <button class="btn btn-danger">Supprimer "{{ entity.name }}"</button>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
