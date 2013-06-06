@@ -1,0 +1,76 @@
+{% extends "AdminBundle:Layouts:master.html.twig" %}
+
+{% block headstyles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/css/jPicker-1.1.6.min.css">
+{% endblock %}
+
+{% form_theme form ":Form:bootstrap_form_horizontal.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h3 class="text-center">Couleur "{{ entity.name }}"</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6 offset3">
+                <ul class="unstyled">
+                    <li>Couleur de texte: #{{ entity.foreground }}</li>
+                    <li>Couleur de fond: #{{ entity.background }}</li>
+                </ul>
+                <p style="padding:10px;background-color: {{ "#"~entity.background }}; color: {{ "#"~entity.foreground }};">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, laboriosam magni. Accusantium
+                    asperiores blanditiis cum dolor eligendi ex ipsa maiores maxime mollitia nemo officia, quisquam
+                    ratione tempore vel, voluptas voluptatem.</p>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="span6 offset3">
+                <form action="{{ path("admin_misc_color_update",{"id":entity.id}) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+                    {{ form_widget(form) }}
+                    <input type="hidden" name="_method" value="PUT" />
+                    <div class="control-group info">
+                        <div class="controls">
+                            <span class="help-block"><small>* champs requis</small></span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" class="btn btn-primary" value="Mettre à jour">
+                        <input type="reset" class="btn" value="Annuler">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footscripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="/js/vendor/jpicker-1.1.6.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var foreground = $("#site_adminbundle_colortype_foreground"), background = $("#site_adminbundle_colortype_background");
+
+            if(foreground.val() == ""){
+                foreground.val("000000");
+            }
+            if(background.val() == ""){
+                background.val("ffffff");
+            }
+
+
+            foreground.jPicker(
+                    {window:{position:{y:"bottom"}}},
+                    null);
+
+
+            background.jPicker(
+                    {window:{position:{y:"bottom"}}},
+                    null);
+        });
+    </script>
+{% endblock %}

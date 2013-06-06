@@ -7,7 +7,29 @@
                 <h3>Gestion des couleurs</h3>
                 <p><a href="{{ path("admin_misc_color_new") }}">Créer une couleur <i class="icon-chevron-right"></i></a></p>
                 {% if colors|length > 0 %}
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Couleur du texte</th>
+                        <th>Couleur de fond</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for color in colors %}
+                        <tr>
+                            <td>{{ color.id }}</td>
+                            <td style="background-color: {{ "#"~color.background }}; color: {{ "#"~color.foreground }};">{{ color.name }}</td>
+                            <td>{{ color.foreground }}</td>
+                            <td>{{ color.background }}</td>
+                            <td><a href="{{ path("admin_misc_color_show", {"id":color.id}) }}">Voir</a> | <a href="{{ path("admin_misc_color_edit", {"id":color.id}) }}">Editer</a></td>
+                        </tr>
 
+                    {% endfor %}
+                    </tbody>
+                </table>
                 {% else %}
                     <p class="well">Pas de couleurs enregistrées.</p>
                 {% endif %}
