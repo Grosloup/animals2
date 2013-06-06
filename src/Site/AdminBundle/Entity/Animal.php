@@ -15,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Animal
 {
     /**
-     * @ORM\OneToMany(targetEntity="Site\AnimalBundle\Entity\Post", mappedBy="animal")
+     * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Post", mappedBy="animal")
      * @ORM\OrderBy({"date"="DESC"})
      */
     protected $events;
