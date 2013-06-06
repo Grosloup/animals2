@@ -41,3 +41,36 @@ admin_misc_color_delete:
         id: \d+
         _method: delete|post
 
+admin_misc_event_types_index:
+    pattern: /admin/misc/event_types
+    defaults: { _controller: AdminBundle:EventType:index }
+admin_misc_event_types_show:
+    pattern: /admin/misc/event_types/{id}/show
+    defaults: { _controller: AdminBundle:EventType:show }
+    requirements:
+        id: \d+
+admin_misc_event_types_new:
+    pattern: /admin/misc/event_types/new
+    defaults: { _controller: AdminBundle:EventType:new }
+admin_misc_event_types_create:
+    pattern: /admin/misc/event_types/create
+    defaults: { _controller: AdminBundle:EventType:create }
+    requirements:
+        _method: post
+admin_misc_event_types_edit:
+    pattern: /admin/misc/event_types/{id}/edit
+    defaults: { _controller: AdminBundle:EventType:edit }
+    requirements:
+        id: \d+
+admin_misc_event_types_update:
+    pattern: /admin/misc/event_types/{id}/update
+    defaults: { _controller: AdminBundle:EventType:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_misc_event_types_delete:
+    pattern: /admin/misc/event_types/{id}/delete
+    defaults: { _controller: AdminBundle:EventType:delete }
+    requirements:
+        id: \d+
+        _method: delete|post
