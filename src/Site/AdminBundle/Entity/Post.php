@@ -50,6 +50,13 @@ class Post
      */
     protected $type;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Site\AdminBundle\Entity\Animal", inversedBy="events")
+     * @ORM\JoinColumn(name="animal_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $animal;
+
+
 
     /**
      * Get id
@@ -151,5 +158,28 @@ class Post
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set animal
+     *
+     * @param Animal $animal
+     * @return Post
+     */
+    public function setAnimal(Animal $animal = null)
+    {
+        $this->animal = $animal;
+
+        return $this;
+    }
+
+    /**
+     * Get animal
+     *
+     * @return Animal
+     */
+    public function getAnimal()
+    {
+        return $this->animal;
     }
 }
