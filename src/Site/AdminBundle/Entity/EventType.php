@@ -2,6 +2,7 @@
 
 namespace Site\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -14,6 +15,20 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class EventType
 {
     /**
+     * @ORM\ManyToOne(targetEntity="Site\AdminBundle\Entity\Color")
+     * @ORM\JoinColumn(name="color_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $color;
+    /**
+     * @ORM\Column(name="slug", type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     */
+    protected $slug;
+    /**
+     * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Post", mappedBy="type")
+     */
+    protected $events;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -21,7 +36,6 @@ class EventType
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
@@ -30,17 +44,12 @@ class EventType
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Site\AdminBundle\Entity\Color")
-     * @ORM\JoinColumn(name="color_id", referencedColumnName="id", onDelete="SET NULL")
+     * Constructor
      */
-    protected $color;
-
-    /**
-     * @ORM\Column(name="slug", type="string", length=255)
-     * @Gedmo\Slug(fields={"name"})
-     */
-    protected $slug;
-
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -50,6 +59,16 @@ class EventType
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -66,13 +85,13 @@ class EventType
     }
 
     /**
-     * Get name
+     * Get color
      *
-     * @return string
+     * @return Color
      */
-    public function getName()
+    public function getColor()
     {
-        return $this->name;
+        return $this->color;
     }
 
     /**
@@ -89,13 +108,13 @@ class EventType
     }
 
     /**
-     * Get color
+     * Get slug
      *
-     * @return Color
+     * @return string
      */
-    public function getColor()
+    public function getSlug()
     {
-        return $this->color;
+        return $this->slug;
     }
 
     /**
@@ -107,17 +126,40 @@ class EventType
     public function setSlug($slug)
     {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
     /**
-     * Get slug
+     * Add events
      *
-     * @return string 
+     * @param Post $events
+     * @return EventType
      */
-    public function getSlug()
+    public function addEvent(Post $events)
     {
-        return $this->slug;
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param Post $events
+     */
+    public function removeEvent(Post $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }
