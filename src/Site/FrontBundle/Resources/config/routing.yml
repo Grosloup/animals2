@@ -1,3 +1,13 @@
 front_homepage:
     pattern:  /
     defaults: { _controller: FrontBundle:Default:index }
+
+login:
+    pattern: /login
+    defaults: { _controller: FrontBundle:Login:login}
+login_check:
+    pattern: /login_check
+    defaults: { _controller: FrontBundle:Login:loginCheck}
+logout:
+    pattern: /logout
+    defaults: { _controller: FrontBundle:Login:logout}
