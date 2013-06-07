@@ -85,7 +85,7 @@ class UserController extends BaseController implements CRUDInterface
         if(!$entity){
             throw $this->createNotFoundException("Utilisateur introuvable");
         }
-
+        // TODO: promote demote Action
         return $this->render("AdminBundle:User:prodemote.html.twig");
     }
 
