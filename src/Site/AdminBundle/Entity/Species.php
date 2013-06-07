@@ -2,6 +2,7 @@
 
 namespace Site\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,6 +14,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Species
 {
     /**
+     * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Animal", mappedBy="species")
+     */
+    protected $animals;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -20,21 +25,18 @@ class Species
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
     /**
      * @var string
      *
      * @ORM\Column(name="name_en", type="string", length=255)
      */
     private $nameEn;
-
     /**
      * @var string
      *
@@ -43,10 +45,12 @@ class Species
     private $nameLa;
 
     /**
-     * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Animal", mappedBy="species")
+     * Constructor
      */
-    protected $animals;
-
+    public function __construct()
+    {
+        $this->animals = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -56,6 +60,16 @@ class Species
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -72,13 +86,13 @@ class Species
     }
 
     /**
-     * Get name
+     * Get nameEn
      *
      * @return string
      */
-    public function getName()
+    public function getNameEn()
     {
-        return $this->name;
+        return $this->nameEn;
     }
 
     /**
@@ -95,13 +109,13 @@ class Species
     }
 
     /**
-     * Get nameEn
+     * Get nameLa
      *
      * @return string
      */
-    public function getNameEn()
+    public function getNameLa()
     {
-        return $this->nameEn;
+        return $this->nameLa;
     }
 
     /**
@@ -118,41 +132,24 @@ class Species
     }
 
     /**
-     * Get nameLa
-     *
-     * @return string
-     */
-    public function getNameLa()
-    {
-        return $this->nameLa;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->animals = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
      * Add animals
      *
-     * @param \Site\AdminBundle\Entity\Animal $animals
+     * @param Animal $animals
      * @return Species
      */
-    public function addAnimal(\Site\AdminBundle\Entity\Animal $animals)
+    public function addAnimal(Animal $animals)
     {
         $this->animals[] = $animals;
-    
+
         return $this;
     }
 
     /**
      * Remove animals
      *
-     * @param \Site\AdminBundle\Entity\Animal $animals
+     * @param Animal $animals
      */
-    public function removeAnimal(\Site\AdminBundle\Entity\Animal $animals)
+    public function removeAnimal(Animal $animals)
     {
         $this->animals->removeElement($animals);
     }
@@ -160,10 +157,15 @@ class Species
     /**
      * Get animals
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAnimals()
     {
         return $this->animals;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

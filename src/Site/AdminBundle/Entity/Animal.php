@@ -19,7 +19,6 @@ class Animal
      * @ORM\OrderBy({"date"="DESC"})
      */
     protected $events;
-
     /**
      * @ORM\ManyToOne(targetEntity="Site\AdminBundle\Entity\Species", inversedBy="animals")
      * @ORM\JoinColumn(name="animal_id", referencedColumnName="id", onDelete="SET NULL")
@@ -377,25 +376,42 @@ class Animal
     }
 
     /**
-     * Set species
-     *
-     * @param \Site\AdminBundle\Entity\Species $species
-     * @return Animal
-     */
-    public function setSpecies(\Site\AdminBundle\Entity\Species $species = null)
-    {
-        $this->species = $species;
-    
-        return $this;
-    }
-
-    /**
      * Get species
      *
-     * @return \Site\AdminBundle\Entity\Species 
+     * @return Species
      */
     public function getSpecies()
     {
         return $this->species;
+    }
+
+    /**
+     * Set species
+     *
+     * @param Species $species
+     * @return Animal
+     */
+    public function setSpecies(Species $species = null)
+    {
+        $this->species = $species;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        if ($this->name != null) {
+            return $this->name;
+        } elseif ($this->chip != null) {
+            return $this->chip;
+        } elseif ($this->earring != null) {
+            return $this->earring;
+        } elseif ($this->collar != null) {
+            return $this->collar;
+        } elseif ($this->zims != null) {
+            return $this->zims;
+        } else {
+            return "inconnu";
+        }
     }
 }
