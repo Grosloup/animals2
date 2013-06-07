@@ -34,13 +34,13 @@ class Species
     /**
      * @var string
      *
-     * @ORM\Column(name="name_en", type="string", length=255)
+     * @ORM\Column(name="name_en", type="string", length=255, nullable=true)
      */
     private $nameEn;
     /**
      * @var string
      *
-     * @ORM\Column(name="name_la", type="string", length=255)
+     * @ORM\Column(name="name_la", type="string", length=255, nullable=true)
      */
     private $nameLa;
 
