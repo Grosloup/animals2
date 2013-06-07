@@ -19,6 +19,12 @@ class Animal
      * @ORM\OrderBy({"date"="DESC"})
      */
     protected $events;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Site\AdminBundle\Entity\Species", inversedBy="animals")
+     * @ORM\JoinColumn(name="animal_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $species;
     /**
      * @var integer
      *
@@ -368,5 +374,28 @@ class Animal
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Set species
+     *
+     * @param \Site\AdminBundle\Entity\Species $species
+     * @return Animal
+     */
+    public function setSpecies(\Site\AdminBundle\Entity\Species $species = null)
+    {
+        $this->species = $species;
+    
+        return $this;
+    }
+
+    /**
+     * Get species
+     *
+     * @return \Site\AdminBundle\Entity\Species 
+     */
+    public function getSpecies()
+    {
+        return $this->species;
     }
 }
