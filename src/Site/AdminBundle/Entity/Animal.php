@@ -21,7 +21,7 @@ class Animal
     protected $events;
     /**
      * @ORM\ManyToOne(targetEntity="Site\AdminBundle\Entity\Species", inversedBy="animals")
-     * @ORM\JoinColumn(name="animal_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="species_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $species;
     /**
