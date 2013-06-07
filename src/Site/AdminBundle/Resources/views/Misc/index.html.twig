@@ -39,9 +39,34 @@
         <div id="eventtypes" class="row">
             <div class="span12">
                 <h3>Gestion des types d'événement</h3>
-                <p><a href="">Créer un type d'événement <i class="icon-chevron-right"></i></a></p>
+                <p><a href="{{ path("admin_misc_event_types_new") }}">Créer un type d'événement <i class="icon-chevron-right"></i></a></p>
                 {% if event_types|length > 0 %}
-
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Slug</th>
+                        <th>Couleur</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for evt in event_types %}
+                    <tr>
+                        <td>{{ evt.id }}</td>
+                        <td>{{ evt.name }}</td>
+                        <td>{{ evt.slug }}</td>
+                        {% if evt.color != null %}
+                            <td style="background-color: {{ "#"~evt.color.background }}; color: {{ "#"~evt.color.foreground }};">{{ evt.color.name }}</td>
+                        {% else %}
+                            <td>&nbsp;</td>
+                        {% endif %}
+                        <td><a href="{{ path("admin_misc_event_types_show", {"id":evt.id}) }}">Voir</a> | <a href="{{ path("admin_misc_event_types_edit", {"id":evt.id}) }}">Editer</a></td>
+                    </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
                 {% else %}
                     <p class="well">Pas de types d'événement enregistrés.</p>
                 {% endif %}

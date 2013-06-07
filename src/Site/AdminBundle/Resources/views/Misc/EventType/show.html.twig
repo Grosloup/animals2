@@ -1,0 +1,21 @@
+{% extends "AdminBundle:Layouts:master.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h3 class="text-center">Type d'événement "{{ entity.name }}"</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6 offset3">
+                <ul class="unstyled">
+                    <li>Slug: {{ entity.slug }}</li>
+                    <li  style="background-color: {{ "#"~entity.color.background }}; color: {{ "#"~entity.color.foreground }};">Couleur associée: {{ entity.color.name }}</li>
+                </ul>
+
+                <a href="{{ path("admin_misc_event_types_edit", {"id":entity.id}) }}" class="btn btn-primary">Editer <i class="icon-chevron-right  icon-white"></i></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
