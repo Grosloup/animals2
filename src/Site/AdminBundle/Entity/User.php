@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 /**
  * User
  *
- * @ORM\Table()
+ * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="Site\AdminBundle\Entity\UserRepository")
  */
 class User implements AdvancedUserInterface, \Serializable
@@ -50,31 +50,31 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="reel_firstname", type="string", length=255)
+     * @ORM\Column(name="reel_firstname", type="string", length=255, nullable=true)
      */
     private $reelFirstname;
     /**
      * @var string
      *
-     * @ORM\Column(name="reel_lastname", type="string", length=255)
+     * @ORM\Column(name="reel_lastname", type="string", length=255, nullable=true)
      */
     private $reelLastname;
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=255)
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      */
     private $firstname;
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=255)
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
      */
     private $lastname;
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
@@ -480,5 +480,23 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->plainPassword = $plainPassword;
         return $this;
+    }
+
+    public function isVisitor()
+    {
+        $roles = $this->getRoles();
+        return in_array("ROLE_VISITOR", $roles);
+    }
+
+    public function isUser()
+    {
+        $roles = $this->getRoles();
+        return in_array("ROLE_USER", $roles);
+    }
+
+    public function isAdmin()
+    {
+        $roles = $this->getRoles();
+        return in_array("ROLE_ADMIN", $roles);
     }
 }

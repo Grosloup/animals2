@@ -5,7 +5,49 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-list users
+                <h3>Gestion des utilisateurs</h3>
+                <p><a href="{{ path("admin_users_new") }}">Enregistrer un nouvel utilisateur <i class="icon-chevron-right"></i></a></p>
+                {% if entities|length > 0 %}
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Pseudo</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Actif</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td>{{ entity.id }}</td>
+                            <td>{{ entity.username }}</td>
+                            <td>{{ entity.reelLastname }}</td>
+                            <td>{{ entity.reelFirstname }}</td>
+                            {% if entity.isActive %}
+                                <td>oui</td>
+                            {% else %}
+                                <td>non</td>
+                            {% endif %}
+                            {% if entity.isVisitor %}
+                                <td>Visiteur</td>
+                            {% elseif entity.isUser %}
+                                <td>Utilisateur</td>
+                            {% elseif entity.isAdmin %}
+                                <td>Administrateur</td>
+                            {% endif %}
+
+                            <td><a href="{{ path("admin_users_show", {"id":entity.id}) }}">Voir</a> | <a href="{{ path("admin_users_edit", {"id":entity.id}) }}">Editer</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    </table>
+                {% else %}
+                    <p class="well">Pas d'utilisateurs enregistrées.</p>
+                {% endif %}
             </div>
         </div>
     </div>
