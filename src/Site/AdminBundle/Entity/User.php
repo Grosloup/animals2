@@ -12,8 +12,33 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Site\AdminBundle\Entity\UserRepository")
  */
-class User implements AdvancedUserInterface
+class User implements AdvancedUserInterface, \Serializable
 {
+    /**
+     * @ORM\Column(name="username", type="string", length=255)
+     */
+    protected $username;
+    /**
+     * @ORM\Column(name="password", type="string", length=255)
+     */
+    protected $password;
+    /**
+     * @var string
+     */
+    protected $plainPassword;
+    /**
+     * @var array
+     * @ORM\Column(name="roles", type="array")
+     */
+    protected $roles = [];
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    protected $isActive;
+    /**
+     * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Post", mappedBy="author")
+     */
+    protected $posts;
     /**
      * @var integer
      *
@@ -22,35 +47,30 @@ class User implements AdvancedUserInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="reel_firstname", type="string", length=255)
      */
     private $reelFirstname;
-
     /**
      * @var string
      *
      * @ORM\Column(name="reel_lastname", type="string", length=255)
      */
     private $reelLastname;
-
     /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
      */
     private $firstname;
-
     /**
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
     private $lastname;
-
     /**
      * @var string
      *
@@ -59,30 +79,14 @@ class User implements AdvancedUserInterface
     private $email;
 
     /**
-     * @ORM\Column(name="username", type="string", length=255)
+     * Constructor
      */
-    protected $username;
+    public function __construct()
+    {
+        $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $this->posts = new ArrayCollection();
+    }
 
-    /**
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    protected $password;
-
-    /**
-     * @var array
-     * @ORM\Column(name="roles", type="array")
-     */
-    protected $roles = [];
-
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-    protected $isActive;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Post", mappedBy="author")
-     */
-    protected $posts;
     /**
      * Get id
      *
@@ -91,6 +95,16 @@ class User implements AdvancedUserInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get reelFirstname
+     *
+     * @return string
+     */
+    public function getReelFirstname()
+    {
+        return $this->reelFirstname;
     }
 
     /**
@@ -107,13 +121,13 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Get reelFirstname
+     * Get reelLastname
      *
      * @return string
      */
-    public function getReelFirstname()
+    public function getReelLastname()
     {
-        return $this->reelFirstname;
+        return $this->reelLastname;
     }
 
     /**
@@ -130,13 +144,13 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Get reelLastname
+     * Get firstname
      *
      * @return string
      */
-    public function getReelLastname()
+    public function getFirstname()
     {
-        return $this->reelLastname;
+        return $this->firstname;
     }
 
     /**
@@ -153,13 +167,13 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Get firstname
+     * Get lastname
      *
      * @return string
      */
-    public function getFirstname()
+    public function getLastname()
     {
-        return $this->firstname;
+        return $this->lastname;
     }
 
     /**
@@ -176,13 +190,13 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Get lastname
+     * Get email
      *
      * @return string
      */
-    public function getLastname()
+    public function getEmail()
     {
-        return $this->lastname;
+        return $this->email;
     }
 
     /**
@@ -199,17 +213,6 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-
-    /**
      * Checks whether the user's account has expired.
      *
      * Internally, if this method returns false, the authentication system
@@ -221,7 +224,7 @@ class User implements AdvancedUserInterface
      */
     public function isAccountNonExpired()
     {
-        // TODO: Implement isAccountNonExpired() method.
+        return true;
     }
 
     /**
@@ -236,7 +239,7 @@ class User implements AdvancedUserInterface
      */
     public function isAccountNonLocked()
     {
-        // TODO: Implement isAccountNonLocked() method.
+        return true;
     }
 
     /**
@@ -251,7 +254,7 @@ class User implements AdvancedUserInterface
      */
     public function isCredentialsNonExpired()
     {
-        // TODO: Implement isCredentialsNonExpired() method.
+        return true;
     }
 
     /**
@@ -266,7 +269,7 @@ class User implements AdvancedUserInterface
      */
     public function isEnabled()
     {
-        // TODO: Implement isEnabled() method.
+        return $this->getIsActive();
     }
 
     /**
@@ -287,81 +290,9 @@ class User implements AdvancedUserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
-    }
-
-    /**
-     * Returns the password used to authenticate the user.
-     *
-     * This should be the encoded password. On authentication, a plain-text
-     * password will be salted, encoded, and then compared to this value.
-     *
-     * @return string The password
-     */
-    public function getPassword()
-    {
-        // TODO: Implement getPassword() method.
-    }
-
-    /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * This can return null if the password was not encoded using a salt.
-     *
-     * @return string The salt
-     */
-    public function getSalt()
-    {
-        // TODO: Implement getSalt() method.
-    }
-
-    /**
-     * Returns the username used to authenticate the user.
-     *
-     * @return string The username
-     */
-    public function getUsername()
-    {
-        // TODO: Implement getUsername() method.
-    }
-
-    /**
-     * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
-     *
-     * @return void
-     */
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
+        $roles = $this->roles;
+        $roles[] = "ROLE_USER";
+        return array_unique($roles);
     }
 
     /**
@@ -378,16 +309,77 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Set isActive
+     * Returns the password used to authenticate the user.
      *
-     * @param boolean $isActive
+     * This should be the encoded password. On authentication, a plain-text
+     * password will be salted, encoded, and then compared to this value.
+     *
+     * @return string The password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
      * @return User
      */
-    public function setIsActive($isActive)
+    public function setPassword($password)
     {
-        $this->isActive = $isActive;
+        $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string The salt
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     *
+     * @return void
+     */
+    public function eraseCredentials()
+    {
+        $this->setPlainPassword(null);
     }
 
     /**
@@ -399,12 +391,18 @@ class User implements AdvancedUserInterface
     {
         return $this->isActive;
     }
+
     /**
-     * Constructor
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return User
      */
-    public function __construct()
+    public function setIsActive($isActive)
     {
-        $this->posts = new ArrayCollection();
+        $this->isActive = $isActive;
+
+        return $this;
     }
 
     /**
@@ -438,5 +436,49 @@ class User implements AdvancedUserInterface
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * String representation of object
+     * @link http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     */
+    public function serialize()
+    {
+        return serialize(["id" => $this->getId()]);
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * Constructs the object
+     * @link http://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     */
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+        $this->id = $data['id'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     * @return $this
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
     }
 }
