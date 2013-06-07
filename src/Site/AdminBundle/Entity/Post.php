@@ -56,6 +56,12 @@ class Post
      */
     protected $animal;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Site\AdminBundle\Entity\User", inversedBy="posts")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $author;
+
 
 
     /**
@@ -181,5 +187,28 @@ class Post
     public function getAnimal()
     {
         return $this->animal;
+    }
+
+    /**
+     * Set author
+     *
+     * @param User $author
+     * @return Post
+     */
+    public function setAuthor(User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }

@@ -109,6 +109,16 @@
                 {% endif %}
             </div>
         </div>
+        <div id="status" class="row">
+            <div class="span12">
+                <h3>Liste des status</h3>
+                {% if status|length > 0 %}
+                    <p>{{ status|join(", ") }}</p>
+                {% else %}
+                    <p class="well">status non configurés</p>
+                {% endif %}
+            </div>
+        </div>
         <div id="weights" class="row">
             <div class="span12">
                 <h3>Gestion des poids</h3>

@@ -95,6 +95,16 @@ class Animal
     private $createdAt;
 
     /**
+     * @ORM\Column(name="status", length=10, type="string")
+     */
+    protected $status;
+
+    /**
+     * @ORM\Column(name="sexe", type="string", length=10)
+     */
+    protected $sexe;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -413,5 +423,51 @@ class Animal
         } else {
             return "inconnu";
         }
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Animal
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set sexe
+     *
+     * @param string $sexe
+     * @return Animal
+     */
+    public function setSexe($sexe)
+    {
+        $this->sexe = $sexe;
+    
+        return $this;
+    }
+
+    /**
+     * Get sexe
+     *
+     * @return string 
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
     }
 }

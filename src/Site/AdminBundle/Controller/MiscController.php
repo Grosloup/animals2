@@ -21,7 +21,12 @@ class MiscController extends BaseController
         if($this->container->hasParameter("sexes")){
             $sexes = $this->container->getParameter("sexes");
         }
+        $status = [];
+        if($this->container->hasParameter("status")){
+            $status = $this->container->getParameter("status");
+        }
         $eventTypes = $this->getRepo("AdminBundle:EventType")->findAll();
-        return $this->render("AdminBundle:Misc:index.html.twig", ["colors"=>$colors, "iucns"=>$iucns, "sexes"=>$sexes, "event_types"=>$eventTypes]);
+        return $this->render("AdminBundle:Misc:index.html.twig",
+            ["colors"=>$colors, "iucns"=>$iucns, "sexes"=>$sexes, "status"=>$status, "event_types"=>$eventTypes]);
     }
 }
