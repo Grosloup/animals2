@@ -110,3 +110,8 @@ admin_users_delete:
     requirements:
         id: \d+
         _method: delete|post
+admin_users_promote_demote:
+    pattern: /admin/users/{id}/promote_demote
+    defaults: { _controller: AdminBundle:User:prodemote }
+    requirements:
+        id: \d+

@@ -79,6 +79,16 @@ class UserController extends BaseController implements CRUDInterface
         // TODO: Implement deleteAction() method.
     }
 
+    public function prodemoteAction($id)
+    {
+        $entity = $this->getRepo("AdminBundle:User")->find($id);
+        if(!$entity){
+            throw $this->createNotFoundException("Utilisateur introuvable");
+        }
+
+        return $this->render("AdminBundle:User:prodemote.html.twig");
+    }
+
     private function encodePassword(User $user, $password)
     {
         $factory = $this->get("security.encoder_factory");

@@ -17,6 +17,7 @@
                         <th>Prénom</th>
                         <th>Actif</th>
                         <th>Role</th>
+                        <th>Promouvoir/Dégrader</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -39,7 +40,7 @@
                             {% elseif entity.isAdmin %}
                                 <td>Administrateur</td>
                             {% endif %}
-
+                            <td><a href="{{ path("admin_users_promote_demote", {"id":entity.id}) }}">Aller</a></td>
                             <td><a href="{{ path("admin_users_show", {"id":entity.id}) }}">Voir</a> | <a href="{{ path("admin_users_edit", {"id":entity.id}) }}">Editer</a></td>
                         </tr>
                     {% endfor %}
