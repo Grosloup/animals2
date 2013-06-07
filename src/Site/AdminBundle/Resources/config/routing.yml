@@ -74,3 +74,39 @@ admin_misc_event_types_delete:
     requirements:
         id: \d+
         _method: delete|post
+
+
+
+admin_users_index:
+    pattern: /admin/users
+    defaults: { _controller: AdminBundle:User:index }
+admin_users_show:
+    pattern: /admin/users/{id}/show
+    defaults: { _controller: AdminBundle:User:show }
+    requirements:
+        id: \d+
+admin_users_new:
+    pattern: /admin/users/new
+    defaults: { _controller: AdminBundle:User:new }
+admin_users_create:
+    pattern: /admin/users/create
+    defaults: { _controller: AdminBundle:User:create }
+    requirements:
+        _method: post
+admin_users_edit:
+    pattern: /admin/users/{id}/edit
+    defaults: { _controller: AdminBundle:User:edit }
+    requirements:
+        id: \d+
+admin_users_update:
+    pattern: /admin/users/{id}/update
+    defaults: { _controller: AdminBundle:User:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_users_delete:
+    pattern: /admin/users/{id}/delete
+    defaults: { _controller: AdminBundle:User:delete }
+    requirements:
+        id: \d+
+        _method: delete|post
