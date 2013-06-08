@@ -39,6 +39,12 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Post", mappedBy="author")
      */
     protected $posts;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="locked", type="boolean")
+     */
+    protected $accountLocked = false;
     /**
      * @var integer
      *
@@ -239,7 +245,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function isAccountNonLocked()
     {
-        return true;
+        return !$this->getAccountLocked();
     }
 
     /**
@@ -485,18 +491,44 @@ class User implements AdvancedUserInterface, \Serializable
     public function isVisitor()
     {
         $roles = $this->getRoles();
-        return in_array("ROLE_VISITOR", $roles);
+        return $roles[0] == "ROLE_VISITOR";
+        //return in_array("ROLE_VISITOR", $roles);
     }
 
     public function isUser()
     {
         $roles = $this->getRoles();
-        return in_array("ROLE_USER", $roles);
+        return $roles[0] == "ROLE_USER";
+        //return in_array("ROLE_USER", $roles);
     }
 
     public function isAdmin()
     {
         $roles = $this->getRoles();
-        return in_array("ROLE_ADMIN", $roles);
+        return $roles[0] == "ROLE_ADMIN";
+        //return in_array("ROLE_ADMIN", $roles);
+    }
+
+    /**
+     * Set accountLocked
+     *
+     * @param boolean $accountLocked
+     * @return User
+     */
+    public function setAccountLocked($accountLocked)
+    {
+        $this->accountLocked = $accountLocked;
+
+        return $this;
+    }
+
+    /**
+     * Get accountLocked
+     *
+     * @return boolean
+     */
+    public function getAccountLocked()
+    {
+        return $this->accountLocked;
     }
 }

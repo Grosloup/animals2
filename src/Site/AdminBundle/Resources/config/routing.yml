@@ -75,7 +75,73 @@ admin_misc_event_types_delete:
         id: \d+
         _method: delete|post
 
+admin_misc_houses_index:
+    pattern: /admin/misc/houses
+    defaults: { _controller: AdminBundle:House:index }
+admin_misc_houses_show:
+    pattern: /admin/misc/houses/{id}/show
+    defaults: { _controller: AdminBundle:House:show }
+    requirements:
+        id: \d+
+admin_misc_houses_new:
+    pattern: /admin/misc/houses/new
+    defaults: { _controller: AdminBundle:House:new }
+admin_misc_houses_create:
+    pattern: /admin/misc/houses/create
+    defaults: { _controller: AdminBundle:House:create }
+    requirements:
+        _method: post
+admin_misc_houses_edit:
+    pattern: /admin/misc/houses/{id}/edit
+    defaults: { _controller: AdminBundle:House:edit }
+    requirements:
+        id: \d+
+admin_misc_houses_update:
+    pattern: /admin/misc/houses/{id}/update
+    defaults: { _controller: AdminBundle:House:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_misc_houses_delete:
+    pattern: /admin/misc/houses/{id}/delete
+    defaults: { _controller: AdminBundle:House:delete }
+    requirements:
+        id: \d+
+        _method: delete|post
 
+admin_misc_enclosures_index:
+    pattern: /admin/misc/enclosures
+    defaults: { _controller: AdminBundle:Enclosure:index }
+admin_misc_enclosures_show:
+    pattern: /admin/misc/enclosures/{id}/show
+    defaults: { _controller: AdminBundle:Enclosure:show }
+    requirements:
+        id: \d+
+admin_misc_enclosures_new:
+    pattern: /admin/misc/enclosures/new
+    defaults: { _controller: AdminBundle:Enclosure:new }
+admin_misc_enclosures_create:
+    pattern: /admin/misc/enclosures/create
+    defaults: { _controller: AdminBundle:Enclosure:create }
+    requirements:
+        _method: post
+admin_misc_enclosures_edit:
+    pattern: /admin/misc/enclosures/{id}/edit
+    defaults: { _controller: AdminBundle:Enclosure:edit }
+    requirements:
+        id: \d+
+admin_misc_enclosures_update:
+    pattern: /admin/misc/enclosures/{id}/update
+    defaults: { _controller: AdminBundle:Enclosure:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_misc_enclosures_delete:
+    pattern: /admin/misc/enclosures/{id}/delete
+    defaults: { _controller: AdminBundle:Enclosure:delete }
+    requirements:
+        id: \d+
+        _method: delete|post
 
 admin_users_index:
     pattern: /admin/users
@@ -115,72 +181,35 @@ admin_users_promote_demote:
     defaults: { _controller: AdminBundle:User:prodemote }
     requirements:
         id: \d+
-
-admin_misc_houses_index:
-    pattern: /admin/misc/houses
-    defaults: { _controller: AdminBundle:House:index }
-admin_misc_houses_show:
-    pattern: /admin/misc/houses/{id}/show
-    defaults: { _controller: AdminBundle:House:show }
+admin_users_promote:
+    pattern: /admin/users/{id}/promote/{role}
+    defaults: { _controller: AdminBundle:User:promote }
     requirements:
         id: \d+
-admin_misc_houses_new:
-    pattern: /admin/misc/houses/new
-    defaults: { _controller: AdminBundle:House:new }
-admin_misc_houses_create:
-    pattern: /admin/misc/houses/create
-    defaults: { _controller: AdminBundle:House:create }
-    requirements:
-        _method: post
-admin_misc_houses_edit:
-    pattern: /admin/misc/houses/{id}/edit
-    defaults: { _controller: AdminBundle:House:edit }
+        role: visiteur|utilisateur|administrateur
+admin_users_demote:
+    pattern: /admin/users/{id}/demote/{role}
+    defaults: { _controller: AdminBundle:User:demote }
     requirements:
         id: \d+
-admin_misc_houses_update:
-    pattern: /admin/misc/houses/{id}/update
-    defaults: { _controller: AdminBundle:House:update }
+        role: visiteur|utilisateur|administrateur
+admin_users_activate:
+    pattern: /admin/users/{id}/activate
+    defaults: { _controller: AdminBundle:User:activate }
     requirements:
         id: \d+
-        _method: put|post
-admin_misc_houses_delete:
-    pattern: /admin/misc/houses/{id}/delete
-    defaults: { _controller: AdminBundle:House:delete }
+admin_users_deactivate:
+    pattern: /admin/users/{id}/deactivate
+    defaults: { _controller: AdminBundle:User:deactivate }
     requirements:
         id: \d+
-        _method: delete|post
-
-
-admin_misc_enclosures_index:
-    pattern: /admin/misc/enclosures
-    defaults: { _controller: AdminBundle:Enclosure:index }
-admin_misc_enclosures_show:
-    pattern: /admin/misc/enclosures/{id}/show
-    defaults: { _controller: AdminBundle:Enclosure:show }
+admin_users_lock:
+    pattern: /admin/users/{id}/lock
+    defaults: { _controller: AdminBundle:User:lock }
     requirements:
         id: \d+
-admin_misc_enclosures_new:
-    pattern: /admin/misc/enclosures/new
-    defaults: { _controller: AdminBundle:Enclosure:new }
-admin_misc_enclosures_create:
-    pattern: /admin/misc/enclosures/create
-    defaults: { _controller: AdminBundle:Enclosure:create }
-    requirements:
-        _method: post
-admin_misc_enclosures_edit:
-    pattern: /admin/misc/enclosures/{id}/edit
-    defaults: { _controller: AdminBundle:Enclosure:edit }
+admin_users_unlock:
+    pattern: /admin/users/{id}/unlock
+    defaults: { _controller: AdminBundle:User:unlock }
     requirements:
         id: \d+
-admin_misc_enclosures_update:
-    pattern: /admin/misc/enclosures/{id}/update
-    defaults: { _controller: AdminBundle:Enclosure:update }
-    requirements:
-        id: \d+
-        _method: put|post
-admin_misc_enclosures_delete:
-    pattern: /admin/misc/enclosures/{id}/delete
-    defaults: { _controller: AdminBundle:Enclosure:delete }
-    requirements:
-        id: \d+
-        _method: delete|post

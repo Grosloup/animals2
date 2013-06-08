@@ -16,6 +16,7 @@
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Actif</th>
+                        <th>Bloqué</th>
                         <th>Role</th>
                         <th>Promouvoir/Dégrader</th>
                         <th>Actions</th>
@@ -29,16 +30,21 @@
                             <td>{{ entity.reelLastname }}</td>
                             <td>{{ entity.reelFirstname }}</td>
                             {% if entity.isActive %}
-                                <td>oui</td>
+                                <td>oui | <a href="{{ path("admin_users_deactivate", {"id":entity.id}) }}">Désactiver</a></td>
                             {% else %}
-                                <td>non</td>
+                                <td>non | <a href="{{ path("admin_users_activate", {"id":entity.id}) }}">Activer</a></td>
                             {% endif %}
-                            {% if entity.isVisitor %}
-                                <td>Visiteur</td>
+                            {% if entity.accountLocked %}
+                                <td>oui | <a href="{{ path("admin_users_unlock",{"id":entity.id}) }}">Débloquer</a></td>
+                            {% else %}
+                                <td>non | <a href="{{ path("admin_users_lock",{"id":entity.id}) }}">Bloquer</a></td>
+                            {% endif %}
+                            {% if entity.isAdmin %}
+                                <td>Administrateur</td>
                             {% elseif entity.isUser %}
                                 <td>Utilisateur</td>
-                            {% elseif entity.isAdmin %}
-                                <td>Administrateur</td>
+                            {% elseif entity.isVisitor %}
+                                <td>Visiteur</td>
                             {% endif %}
                             <td><a href="{{ path("admin_users_promote_demote", {"id":entity.id}) }}">Aller</a></td>
                             <td><a href="{{ path("admin_users_show", {"id":entity.id}) }}">Voir</a> | <a href="{{ path("admin_users_edit", {"id":entity.id}) }}">Editer</a></td>

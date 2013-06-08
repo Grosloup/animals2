@@ -47,7 +47,7 @@ class UserController extends BaseController implements CRUDInterface
             if($form->isValid()){
                 $user = $form->getData();
                 $user->setPassword($this->encodePassword($user, $user->getPlainPassword()));
-                $user->setIsActive(true);
+                //$user->setIsActive(true);
                 $em = $this->getEm();
                 $em->persist($entity);
                 $em->flush();
@@ -85,8 +85,38 @@ class UserController extends BaseController implements CRUDInterface
         if(!$entity){
             throw $this->createNotFoundException("Utilisateur introuvable");
         }
-        // TODO: promote demote Action
-        return $this->render("AdminBundle:User:prodemote.html.twig");
+        return $this->render("AdminBundle:User:prodemote.html.twig", ["entity"=>$entity]);
+    }
+
+    public function promoteAction($id,$role)
+    {
+        $entity = $this->getRepo("AdminBundle:User")->find($id);
+        if(!$entity){
+            throw $this->createNotFoundException("Utilisateur introuvable");
+        }
+        $roles = $this->container->getParameter("roles");
+        $newRole = [$roles[$role]];
+        $entity->setRoles($newRole);
+        $em = $this->getEm();
+        $em->persist($entity);
+        $em->flush();
+        return $this->redirect($this->generateUrl("admin_users_index"));
+    }
+
+    public function demoteAction($id,$role)
+    {
+        $entity = $this->getRepo("AdminBundle:User")->find($id);
+        if(!$entity){
+            throw $this->createNotFoundException("Utilisateur introuvable");
+        }
+        $roles = $this->container->getParameter("roles");
+
+        $newRole = [$roles[$role]];
+        $entity->setRoles($newRole);
+        $em = $this->getEm();
+        $em->persist($entity);
+        $em->flush();
+        return $this->redirect($this->generateUrl("admin_users_index"));
     }
 
     private function encodePassword(User $user, $password)
@@ -104,4 +134,55 @@ class UserController extends BaseController implements CRUDInterface
             ;
     }
 
+    public function activateAction($id)
+    {
+        $entity = $this->getRepo("AdminBundle:User")->find($id);
+        if(!$entity){
+            throw $this->createNotFoundException("Utilisateur introuvable");
+        }
+        $em = $this->getEm();
+        $entity->setIsActive(true);
+        $em->persist($entity);
+        $em->flush();
+        return $this->redirect($this->generateUrl("admin_users_index"));
+    }
+
+    public function deactivateAction($id)
+    {
+        $entity = $this->getRepo("AdminBundle:User")->find($id);
+        if(!$entity){
+            throw $this->createNotFoundException("Utilisateur introuvable");
+        }
+        $em = $this->getEm();
+        $entity->setIsActive(false);
+        $em->persist($entity);
+        $em->flush();
+        return $this->redirect($this->generateUrl("admin_users_index"));
+    }
+
+    public function lockAction($id)
+    {
+        $entity = $this->getRepo("AdminBundle:User")->find($id);
+        if(!$entity){
+            throw $this->createNotFoundException("Utilisateur introuvable");
+        }
+        $em = $this->getEm();
+        $entity->setAccountLocked(true);
+        $em->persist($entity);
+        $em->flush();
+        return $this->redirect($this->generateUrl("admin_users_index"));
+    }
+
+    public function unlockAction($id)
+    {
+        $entity = $this->getRepo("AdminBundle:User")->find($id);
+        if(!$entity){
+            throw $this->createNotFoundException("Utilisateur introuvable");
+        }
+        $em = $this->getEm();
+        $entity->setAccountLocked(false);
+        $em->persist($entity);
+        $em->flush();
+        return $this->redirect($this->generateUrl("admin_users_index"));
+    }
 }

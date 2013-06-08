@@ -16,3 +16,5 @@ parameters:
         - "mâle"
         - "femelle"
         - "inconnu"
+    roles:
+        {visiteur: "ROLE_VISITOR",utilisateur: "ROLE_USER",administrateur: "ROLE_ADMIN"}

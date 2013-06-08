@@ -25,7 +25,7 @@ class EditUserType extends AbstractType
             ->add("firstname")
             ->add("lastname")
             ->add("email")
-            ->add("isActive")
+            //->add("isActive")
         ;
     }
 
@@ -38,7 +38,7 @@ class EditUserType extends AbstractType
         $view["firstname"]->vars["label"] = "Prénom modifiable";
         $view["lastname"]->vars["label"] = "Nom modifiable";
         $view["email"]->vars["label"] = "Adresse mail";
-        $view["isActive"]->vars["label"] = "Actif ?";
+        //$view["isActive"]->vars["label"] = "Actif ?";
 
     }
 

@@ -1,12 +1,24 @@
 {% extends "AdminBundle:Layouts:master.html.twig" %}
 
+
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="span12">
-                pro/demote
+                <h3>Promouvoir/Rétrograder {{ entity.username }}</h3>
+                {% if entity.isAdmin %}
+                    <p>Actuellement {{ entity.username }} est Administrateur</p>
+                    <p><a href="{{ path("admin_users_demote",{"id":entity.id, "role":"utilisateur"}) }}">dégrader en utilisateur</a> | <a href="{{ path("admin_users_demote",{"id":entity.id, "role":"visiteur"}) }}">dégrader en visiteur</a></p>
+                {% elseif entity.isUser %}
+                    <p>Actuellement {{ entity.username }} est Utilisateur</p>
+                    <p><a href="{{ path("admin_users_promote",{"id":entity.id, "role":"administrateur"}) }}">promouvoir en administrateur</a> | <a href="{{ path("admin_users_demote",{"id":entity.id, "role":"visiteur"}) }}">dégrader en visiteur</a></p>
+                {% elseif entity.isVisitor %}
+                    <p>Actuellement {{ entity.username }} est Visiteur</p>
+                    <p><a href="{{ path("admin_users_promote",{"id":entity.id, "role":"administrateur"}) }}">promouvoir en administrateur</a> | <a href="{{ path("admin_users_promote",{"id":entity.id, "role":"utilisateur"}) }}">promouvoir en utilisateur</a></p>
+                {% else %}
+                    <p>Erreur ! Role non défini !</p>
+                {% endif %}
             </div>
         </div>
     </div>
-
 {% endblock %}
