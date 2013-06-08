@@ -1,0 +1,33 @@
+{% extends "AdminBundle:Layouts:master.html.twig" %}
+
+{% form_theme form ":Form:bootstrap_form_horizontal.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h3 class="text-center">Enregistrer un nouvel enclos</h3>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="span6 offset3">
+                <form action="{{ path("admin_misc_enclosures_create") }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+                    {{ form_widget(form) }}
+
+                    <div class="control-group info">
+                        <div class="controls">
+                            <span class="help-block"><small>* champs requis</small></span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" class="btn btn-primary" value="Enregistrer">
+                        <input type="reset" class="btn" value="Annuler">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

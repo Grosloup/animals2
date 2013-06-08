@@ -1,0 +1,17 @@
+{% extends "AdminBundle:Layouts:master.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h3 class="text-center">Enclos "{{ entity.name }}"</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6 offset3">
+
+                <a href="{{ path("admin_misc_enclosures_edit", {"id":entity.id}) }}" class="btn btn-primary">Editer <i class="icon-chevron-right  icon-white"></i></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
