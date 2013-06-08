@@ -18,6 +18,11 @@ class Species
      */
     protected $animals;
     /**
+     * @ORM\ManyToOne(targetEntity="Site\AdminBundle\Entity\House", inversedBy="species")
+     * @ORM\JoinColumn(name="house_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $house;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -167,5 +172,28 @@ class Species
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Get house
+     *
+     * @return \Site\AdminBundle\Entity\House
+     */
+    public function getHouse()
+    {
+        return $this->house;
+    }
+
+    /**
+     * Set house
+     *
+     * @param \Site\AdminBundle\Entity\House $house
+     * @return Species
+     */
+    public function setHouse(\Site\AdminBundle\Entity\House $house = null)
+    {
+        $this->house = $house;
+
+        return $this;
     }
 }

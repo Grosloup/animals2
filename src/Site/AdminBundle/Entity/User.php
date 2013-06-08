@@ -32,9 +32,9 @@ class User implements AdvancedUserInterface, \Serializable
      */
     protected $roles = [];
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
      */
-    protected $isActive;
+    protected $isActive = false;
     /**
      * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Post", mappedBy="author")
      */
