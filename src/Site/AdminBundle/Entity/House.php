@@ -21,6 +21,12 @@ class House
      * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Enclosure", mappedBy="house")
      */
     protected $enclosures;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Site\AdminBundle\Entity\Temperature", mappedBy="house")
+     */
+    protected $temperatures;
+
     /**
      * @var integer
      *
@@ -42,6 +48,8 @@ class House
     public function __construct()
     {
         $this->species = new ArrayCollection();
+        $this->enclosures = new ArrayCollection();
+        $this->temperatures = new ArrayCollection();
     }
 
     /**
@@ -148,4 +156,37 @@ class House
         return $this->name;
     }
 
+
+    /**
+     * Add temperatures
+     *
+     * @param Temperature $temperatures
+     * @return House
+     */
+    public function addTemperature(Temperature $temperatures)
+    {
+        $this->temperatures[] = $temperatures;
+
+        return $this;
+    }
+
+    /**
+     * Remove temperatures
+     *
+     * @param Temperature $temperatures
+     */
+    public function removeTemperature(Temperature $temperatures)
+    {
+        $this->temperatures->removeElement($temperatures);
+    }
+
+    /**
+     * Get temperatures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTemperatures()
+    {
+        return $this->temperatures;
+    }
 }
