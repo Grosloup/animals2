@@ -72,6 +72,64 @@
                 {% endif %}
             </div>
         </div>
+        <div id="houses" class="row">
+            <div class="span12">
+                <h3>Gestion des bâtiments</h3>
+                <p><a href="{{ path("admin_misc_houses_new") }}">Créer un bâtiment <i class="icon-chevron-right"></i></a></p>
+                {% if houses|length > 0 %}
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for bat in houses %}
+                            <tr>
+                                <td>{{ bat.id }}</td>
+                                <td>{{ bat.name }}</td>
+                                <td><a href="{{ path("admin_misc_houses_show", {"id":bat.id}) }}">Voir</a> | <a href="{{ path("admin_misc_houses_edit", {"id":bat.id}) }}">Editer</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="well">Pas de bâtiments enregistrés.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div id="enclosures" class="row">
+            <div class="span12">
+                <h3>Gestion des enclos</h3>
+                <p><a href="{{ path("admin_misc_enclosures_new") }}">Créer un enclos <i class="icon-chevron-right"></i></a></p>
+                {% if enclosures|length > 0 %}
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Bâtiment</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for enclos in enclosures %}
+                            <tr>
+                                <td>{{ enclos.id }}</td>
+                                <td>{{ enclos.name }}</td>
+                                <td>{{ enclos.house.name }}</td>
+                                <td><a href="{{ path("admin_misc_enclosures_show", {"id":enclos.id}) }}">Voir</a> | <a href="{{ path("admin_misc_enclosures_edit", {"id":enclos.id}) }}">Editer</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="well">Pas d'enclos enregistrés.</p>
+                {% endif %}
+            </div>
+        </div>
         <div id="iucn" class="row">
             <div class="span12">
                 <h3>Liste <abbr title="Union internationale pour la conservation de la nature">IUCN</abbr></h3>

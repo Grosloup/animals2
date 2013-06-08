@@ -142,4 +142,10 @@ class House
     {
         return $this->enclosures;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 }
