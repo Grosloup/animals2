@@ -11,6 +11,7 @@ namespace Site\AdminBundle\Controller;
 use Site\AdminBundle\Entity\User;
 use Site\AdminBundle\Form\EditUserType;
 use Site\AdminBundle\Form\RegisterUserType;
+use Site\AdminBundle\Exception\UserNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends BaseController implements CRUDInterface
@@ -26,7 +27,8 @@ class UserController extends BaseController implements CRUDInterface
     {
         $entity = $this->getRepo("AdminBundle:User")->find($id);
         if (!$entity) {
-            throw $this->createNotFoundException('Utilisateur introuvable.');
+            //throw $this->createNotFoundException('Utilisateur introuvable.');
+            throw new UserNotFoundException('Il y a un problème, l\'utilisateur ' . $id . ' n\'existe pas!');
         }
         return $this->render("AdminBundle:User:show.html.twig",["entity"=>$entity]);
     }
