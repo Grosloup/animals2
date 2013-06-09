@@ -29,4 +29,9 @@ class BaseController extends Controller
     {
         return $this->getEm()->getRepository($repo);
     }
+
+    protected function isGranted($role)
+    {
+        return $this->get("security.context")->isGranted($role);
+    }
 }

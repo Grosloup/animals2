@@ -66,17 +66,58 @@ class UserController extends BaseController implements CRUDInterface
         }
         $form = $this->createForm(new EditUserType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
-        return $this->render("AdminBundle:User:edit.html.twig",["form"=>$form->createView(),"delete_form"=>$deleteForm->createView(), "entity"=>$entity]);
+        return $this->render("AdminBundle:User:edit.html.twig",
+            [
+                "form"=>$form->createView(),
+                "delete_form"=>$deleteForm->createView(),
+                "entity"=>$entity
+            ]
+        );
     }
 
     public function updateAction($id, Request $request)
     {
-        // TODO: Implement updateAction() method.
+        $em = $this->getEm();
+        $entity = $em->getRepository("AdminBundle:User")->find($id);
+        if(!$entity){
+            throw $this->createNotFoundException("Utilisateur introuvable");
+        }
+        $form = $this->createForm(new EditUserType(), $entity);
+        $form->submit($request);
+        if($form->isValid()){
+            $em = $this->getEm();
+            $em->persist($entity);
+            $em->flush();
+            return $this->redirect($this->generateUrl("admin_users_index"));
+        }
+        $deleteForm = $this->createDeleteForm($id);
+        return $this->render("AdminBundle:User:edit.html.twig",
+            [
+                "form"=>$form->createView(),
+                "delete_form"=>$deleteForm->createView(),
+                "entity"=>$entity
+            ]
+        );
     }
 
     public function deleteAction($id, Request $request)
     {
-        // TODO: Implement deleteAction() method.
+        $form = $this->createDeleteForm($id);
+        $form->submit($request);
+
+        if ($form->isValid()) {
+            $em = $this->getEm();
+            $entity = $em->getRepository('AdminBundle:User')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Utilisateur introuvable.');
+            }
+
+            $em->remove($entity);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('admin_users_index'));
     }
 
     public function prodemoteAction($id)
@@ -126,6 +167,7 @@ class UserController extends BaseController implements CRUDInterface
         $password = $encoder->encodePassword($password, $user->getSalt());
         return $password;
     }
+
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder(array('id' => $id))
