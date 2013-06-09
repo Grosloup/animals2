@@ -25,11 +25,7 @@ class UserController extends BaseController implements CRUDInterface
 
     public function showAction($id)
     {
-        $entity = $this->getRepo("AdminBundle:User")->find($id);
-        if (!$entity) {
-            //throw $this->createNotFoundException('Utilisateur introuvable.');
-            throw new UserNotFoundException('Il y a un problème, l\'utilisateur ' . $id . ' n\'existe pas!');
-        }
+        $entity = $this->findUser($id);
         return $this->render("AdminBundle:User:show.html.twig",["entity"=>$entity]);
     }
 
@@ -62,10 +58,7 @@ class UserController extends BaseController implements CRUDInterface
 
     public function editAction($id)
     {
-        $entity = $this->getRepo("AdminBundle:User")->find($id);
-        if(!$entity){
-            throw $this->createNotFoundException("Utilisateur introuvable");
-        }
+        $entity = $this->findUser($id);
         $form = $this->createForm(new EditUserType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
         return $this->render("AdminBundle:User:edit.html.twig",
@@ -80,10 +73,7 @@ class UserController extends BaseController implements CRUDInterface
     public function updateAction($id, Request $request)
     {
         $em = $this->getEm();
-        $entity = $em->getRepository("AdminBundle:User")->find($id);
-        if(!$entity){
-            throw $this->createNotFoundException("Utilisateur introuvable");
-        }
+        $entity = $this->findUser($id);
         $form = $this->createForm(new EditUserType(), $entity);
         $form->submit($request);
         if($form->isValid()){
@@ -112,7 +102,7 @@ class UserController extends BaseController implements CRUDInterface
             $entity = $em->getRepository('AdminBundle:User')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Utilisateur introuvable.');
+                throw new UserNotFoundException('Il y a un problème, l\'utilisateur ' . $id . ' n\'existe pas!');
             }
 
             $em->remove($entity);
@@ -124,19 +114,13 @@ class UserController extends BaseController implements CRUDInterface
 
     public function prodemoteAction($id)
     {
-        $entity = $this->getRepo("AdminBundle:User")->find($id);
-        if(!$entity){
-            throw $this->createNotFoundException("Utilisateur introuvable");
-        }
+        $entity = $this->findUser($id);
         return $this->render("AdminBundle:User:prodemote.html.twig", ["entity"=>$entity]);
     }
 
     public function promoteAction($id,$role)
     {
-        $entity = $this->getRepo("AdminBundle:User")->find($id);
-        if(!$entity){
-            throw $this->createNotFoundException("Utilisateur introuvable");
-        }
+        $entity = $this->findUser($id);
         $roles = $this->container->getParameter("roles");
         $newRole = [$roles[$role]];
         $entity->setRoles($newRole);
@@ -148,10 +132,7 @@ class UserController extends BaseController implements CRUDInterface
 
     public function demoteAction($id,$role)
     {
-        $entity = $this->getRepo("AdminBundle:User")->find($id);
-        if(!$entity){
-            throw $this->createNotFoundException("Utilisateur introuvable");
-        }
+        $entity = $this->findUser($id);
         $roles = $this->container->getParameter("roles");
 
         $newRole = [$roles[$role]];
@@ -180,10 +161,7 @@ class UserController extends BaseController implements CRUDInterface
 
     public function activateAction($id)
     {
-        $entity = $this->getRepo("AdminBundle:User")->find($id);
-        if(!$entity){
-            throw $this->createNotFoundException("Utilisateur introuvable");
-        }
+        $entity = $this->findUser($id);
         $em = $this->getEm();
         $entity->setIsActive(true);
         $em->persist($entity);
@@ -193,10 +171,7 @@ class UserController extends BaseController implements CRUDInterface
 
     public function deactivateAction($id)
     {
-        $entity = $this->getRepo("AdminBundle:User")->find($id);
-        if(!$entity){
-            throw $this->createNotFoundException("Utilisateur introuvable");
-        }
+        $entity = $this->findUser($id);
         $em = $this->getEm();
         $entity->setIsActive(false);
         $em->persist($entity);
@@ -206,10 +181,7 @@ class UserController extends BaseController implements CRUDInterface
 
     public function lockAction($id)
     {
-        $entity = $this->getRepo("AdminBundle:User")->find($id);
-        if(!$entity){
-            throw $this->createNotFoundException("Utilisateur introuvable");
-        }
+        $entity = $this->findUser($id);
         $em = $this->getEm();
         $entity->setAccountLocked(true);
         $em->persist($entity);
@@ -219,14 +191,20 @@ class UserController extends BaseController implements CRUDInterface
 
     public function unlockAction($id)
     {
-        $entity = $this->getRepo("AdminBundle:User")->find($id);
-        if(!$entity){
-            throw $this->createNotFoundException("Utilisateur introuvable");
-        }
+        $entity = $this->findUser($id);
         $em = $this->getEm();
         $entity->setAccountLocked(false);
         $em->persist($entity);
         $em->flush();
         return $this->redirect($this->generateUrl("admin_users_index"));
+    }
+
+    private function findUser($id)
+    {
+        $entity = $this->getRepo("AdminBundle:User")->find($id);
+        if(!$entity){
+            throw new UserNotFoundException('Il y a un problème, l\'utilisateur ' . $id . ' n\'existe pas!');
+        }
+        return $entity;
     }
 }
