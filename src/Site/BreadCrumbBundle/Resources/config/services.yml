@@ -1,0 +1,9 @@
+parameters:
+    bread_crumb.class: Site\BreadCrumbBundle\Service\BreadCrumb
+    bread_crumb.defaults.page_tree: "page_tree.xml"
+    bread_crumb.defaults.template: "breadcrumb.html.twig"
+
+services:
+    bread_crumb:
+        class: %bread_crumb.class%
+        arguments: [@twig, %page_tree%, %bread_crumb_template%]

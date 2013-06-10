@@ -26,6 +26,8 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     exception_controller: front.controller.exception:showAction
+    globals:
+        breadcrumb: "@bread_crumb"
 
 # Assetic Configuration
 assetic:
@@ -72,3 +74,6 @@ stof_doctrine_extensions:
         default:
             sluggable: true
             timestampable: true
+bread_crumb:
+    page_tree: "%kernel.root_dir%/config/page_tree.xml"
+    template: ~
