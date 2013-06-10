@@ -33,7 +33,7 @@ class ExceptionController extends ExController implements ContainerAwareInterfac
 
     protected function findTemplate(Request $request, $format, $code, $debug)
     {
-        $debug = false;
+        //$debug = false;
         if($this->exceptionClass == 'Site\AdminBundle\Exception\UserNotFoundException'){
             return 'AdminBundle:Exception:user_not_found.html.twig';
         }

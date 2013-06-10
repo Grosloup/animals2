@@ -1,0 +1,25 @@
+{% extends "FrontBundle:Layouts:master.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span8 offset2">
+                <div class="hero-unit">
+                    <h1>Oups ! Une erreur est survenue</h1>
+                    <p>Le serveur indique "404 NOT FOUND"</p>
+                </div>
+            </div>
+        </div>
+        {% if app.environment == "dev" %}
+        <div class="row">
+            <div class="span8 offset2">
+                <p>{{ exception.message }}</p>
+                <p><strong>{{ status_code }}</strong> {{ status_text }} - {{ exception.class|abbr_class }}</p>
+                <p>A la ligne <strong>{{ exception.line }}</strong> de {{ exception.file }}</p>
+
+
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
