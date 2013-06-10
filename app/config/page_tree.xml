@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pages></pages>
+<pages>
+    <page id="admin" title="Admin" route="admin_homepage" parent="null"/>
+    <page id="user" parent="admin" route="admin_users_index" title="Utilisateur"/>
+    <page id="user_create" parent="user" route="admin_users_new" title="Ajout Utilisateur"/>
+</pages>
