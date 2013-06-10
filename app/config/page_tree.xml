@@ -12,4 +12,10 @@
     <page id="product_type_new" title="Ajouter" route="admin_product_types_new" parent="product_type"/>
     <page id="product_type_edit" title="Editer" route="admin_product_types_edit" parent="product_type"/>
     <page id="product_type_show" title="Voir" route="admin_product_types_show" parent="product_type"/>
+
+    <page id="product" title="Produits" parent="admin"  route="admin_products_index"/>
+    <page id="product_new" title="Ajouter" parent="product"  route="admin_products_new"/>
+    <page id="product_edit" title="Editer" parent="product"  route="admin_products_edit"/>
+    <page id="product_show" title="Voir" parent="product"  route="admin_products_show"/>
+
 </pages>

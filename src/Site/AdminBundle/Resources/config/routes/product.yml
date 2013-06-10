@@ -1,0 +1,33 @@
+admin_products_index:
+    pattern: /admin/products
+    defaults: { _controller: AdminBundle:Product:index }
+admin_products_show:
+    pattern: /admin/products/{id}/show
+    defaults: { _controller: AdminBundle:Product:show }
+    requirements:
+        id: \d+
+admin_products_new:
+    pattern: /admin/products/new
+    defaults: { _controller: AdminBundle:Product:new }
+admin_products_create:
+    pattern: /admin/products/create
+    defaults: { _controller: AdminBundle:Product:create }
+    requirements:
+        _method: post
+admin_products_edit:
+    pattern: /admin/products/{id}/edit
+    defaults: { _controller: AdminBundle:Product:edit }
+    requirements:
+        id: \d+
+admin_products_update:
+    pattern: /admin/products/{id}/update
+    defaults: { _controller: AdminBundle:Product:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_products_delete:
+    pattern: /admin/products/{id}/delete
+    defaults: { _controller: AdminBundle:Product:delete }
+    requirements:
+        id: \d+
+        _method: delete|post

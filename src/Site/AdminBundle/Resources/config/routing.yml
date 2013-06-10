@@ -16,3 +16,6 @@ species:
 
 product_types:
     resource: "@AdminBundle/Resources/config/routes/product-type.yml"
+
+products:
+    resource: "@AdminBundle/Resources/config/routes/product.yml"

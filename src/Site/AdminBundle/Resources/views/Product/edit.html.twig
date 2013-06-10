@@ -1,0 +1,48 @@
+{% extends "AdminBundle:Layouts:master.html.twig" %}
+
+{% form_theme form ":Form:bootstrap_form_horizontal.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                {{ breadcrumb.render("admin_products_edit")|raw }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <h3 class="text-center">Produit "{{ entity.name }}"</h3>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="span6 offset3">
+                <form action="{{ path("admin_products_update",{"id":entity.id}) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+                    {{ form_widget(form) }}
+                    <input type="hidden" name="_method" value="PUT" />
+                    <div class="control-group info">
+                        <div class="controls">
+                            <span class="help-block"><small>* champs requis</small></span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" class="btn btn-primary" value="Mettre à jour">
+                        <input type="reset" class="btn" value="Annuler">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6 offset3">
+                <h4>Supprimer ce produit</h4>
+                <form action="{{ path("admin_product_types_delete",{"id":entity.id}) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+                    {{ form_widget(delete_form) }}
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <button class="btn btn-danger">Supprimer "{{ entity.name }}"</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
