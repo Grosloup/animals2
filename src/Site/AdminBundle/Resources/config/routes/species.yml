@@ -1,0 +1,35 @@
+##################################### SPECIES ROUTES ############################
+
+admin_species_index:
+    pattern: /admin/species
+    defaults: { _controller: AdminBundle:Species:index }
+admin_species_show:
+    pattern: /admin/species/{id}/show
+    defaults: { _controller: AdminBundle:Species:show }
+    requirements:
+        id: \d+
+admin_species_new:
+    pattern: /admin/species/new
+    defaults: { _controller: AdminBundle:Species:new }
+admin_species_create:
+    pattern: /admin/species/create
+    defaults: { _controller: AdminBundle:Species:create }
+    requirements:
+        _method: post
+admin_species_edit:
+    pattern: /admin/species/{id}/edit
+    defaults: { _controller: AdminBundle:Species:edit }
+    requirements:
+        id: \d+
+admin_species_update:
+    pattern: /admin/species/{id}/update
+    defaults: { _controller: AdminBundle:Species:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_species_delete:
+    pattern: /admin/species/{id}/delete
+    defaults: { _controller: AdminBundle:Species:delete }
+    requirements:
+        id: \d+
+        _method: delete|post

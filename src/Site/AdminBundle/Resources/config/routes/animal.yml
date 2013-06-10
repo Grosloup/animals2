@@ -1,0 +1,35 @@
+##################################### ANIMAL ROUTES ############################
+
+admin_animal_index:
+    pattern: /admin/animal
+    defaults: { _controller: AdminBundle:Animal:index }
+admin_animal_show:
+    pattern: /admin/animal/{id}/show
+    defaults: { _controller: AdminBundle:Animal:show }
+    requirements:
+        id: \d+
+admin_animal_new:
+    pattern: /admin/animal/new
+    defaults: { _controller: AdminBundle:Animal:new }
+admin_animal_create:
+    pattern: /admin/animal/create
+    defaults: { _controller: AdminBundle:Animal:create }
+    requirements:
+        _method: post
+admin_animal_edit:
+    pattern: /admin/animal/{id}/edit
+    defaults: { _controller: AdminBundle:Animal:edit }
+    requirements:
+        id: \d+
+admin_animal_update:
+    pattern: /admin/animal/{id}/update
+    defaults: { _controller: AdminBundle:Animal:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_animal_delete:
+    pattern: /admin/animal/{id}/delete
+    defaults: { _controller: AdminBundle:Animal:delete }
+    requirements:
+        id: \d+
+        _method: delete|post

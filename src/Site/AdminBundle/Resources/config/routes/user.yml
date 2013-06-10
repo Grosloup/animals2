@@ -1,0 +1,73 @@
+##################################### USER ROUTES ############################
+
+
+admin_users_index:
+    pattern: /admin/users
+    defaults: { _controller: AdminBundle:User:index }
+admin_users_show:
+    pattern: /admin/users/{id}/show
+    defaults: { _controller: AdminBundle:User:show }
+    requirements:
+        id: \d+
+admin_users_new:
+    pattern: /admin/users/new
+    defaults: { _controller: AdminBundle:User:new }
+admin_users_create:
+    pattern: /admin/users/create
+    defaults: { _controller: AdminBundle:User:create }
+    requirements:
+        _method: post
+admin_users_edit:
+    pattern: /admin/users/{id}/edit
+    defaults: { _controller: AdminBundle:User:edit }
+    requirements:
+        id: \d+
+admin_users_update:
+    pattern: /admin/users/{id}/update
+    defaults: { _controller: AdminBundle:User:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_users_delete:
+    pattern: /admin/users/{id}/delete
+    defaults: { _controller: AdminBundle:User:delete }
+    requirements:
+        id: \d+
+        _method: delete|post
+admin_users_promote_demote:
+    pattern: /admin/users/{id}/promote_demote
+    defaults: { _controller: AdminBundle:User:prodemote }
+    requirements:
+        id: \d+
+admin_users_promote:
+    pattern: /admin/users/{id}/promote/{role}
+    defaults: { _controller: AdminBundle:User:promote }
+    requirements:
+        id: \d+
+        role: visiteur|utilisateur|administrateur
+admin_users_demote:
+    pattern: /admin/users/{id}/demote/{role}
+    defaults: { _controller: AdminBundle:User:demote }
+    requirements:
+        id: \d+
+        role: visiteur|utilisateur|administrateur
+admin_users_activate:
+    pattern: /admin/users/{id}/activate
+    defaults: { _controller: AdminBundle:User:activate }
+    requirements:
+        id: \d+
+admin_users_deactivate:
+    pattern: /admin/users/{id}/deactivate
+    defaults: { _controller: AdminBundle:User:deactivate }
+    requirements:
+        id: \d+
+admin_users_lock:
+    pattern: /admin/users/{id}/lock
+    defaults: { _controller: AdminBundle:User:lock }
+    requirements:
+        id: \d+
+admin_users_unlock:
+    pattern: /admin/users/{id}/unlock
+    defaults: { _controller: AdminBundle:User:unlock }
+    requirements:
+        id: \d+

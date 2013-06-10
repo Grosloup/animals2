@@ -1,0 +1,148 @@
+admin_misc_homepage:
+    pattern: /admin/misc
+    defaults: { _controller: AdminBundle:Misc:index }
+
+##################################### MISC COLOR ROUTES ############################
+
+admin_misc_color_index:
+    pattern: /admin/misc/color
+    defaults: { _controller: AdminBundle:Color:index }
+admin_misc_color_show:
+    pattern: /admin/misc/color/{id}/show
+    defaults: { _controller: AdminBundle:Color:show }
+    requirements:
+        id: \d+
+admin_misc_color_new:
+    pattern: /admin/misc/color/new
+    defaults: { _controller: AdminBundle:Color:new }
+admin_misc_color_create:
+    pattern: /admin/misc/color/create
+    defaults: { _controller: AdminBundle:Color:create }
+    requirements:
+        _method: post
+admin_misc_color_edit:
+    pattern: /admin/misc/color/{id}/edit
+    defaults: { _controller: AdminBundle:Color:edit }
+    requirements:
+        id: \d+
+admin_misc_color_update:
+    pattern: /admin/misc/color/{id}/update
+    defaults: { _controller: AdminBundle:Color:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_misc_color_delete:
+    pattern: /admin/misc/color/{id}/delete
+    defaults: { _controller: AdminBundle:Color:delete }
+    requirements:
+        id: \d+
+        _method: delete|post
+
+##################################### MISC EVENT TYPE ROUTES ############################
+
+admin_misc_event_types_index:
+    pattern: /admin/misc/event_types
+    defaults: { _controller: AdminBundle:EventType:index }
+admin_misc_event_types_show:
+    pattern: /admin/misc/event_types/{id}/show
+    defaults: { _controller: AdminBundle:EventType:show }
+    requirements:
+        id: \d+
+admin_misc_event_types_new:
+    pattern: /admin/misc/event_types/new
+    defaults: { _controller: AdminBundle:EventType:new }
+admin_misc_event_types_create:
+    pattern: /admin/misc/event_types/create
+    defaults: { _controller: AdminBundle:EventType:create }
+    requirements:
+        _method: post
+admin_misc_event_types_edit:
+    pattern: /admin/misc/event_types/{id}/edit
+    defaults: { _controller: AdminBundle:EventType:edit }
+    requirements:
+        id: \d+
+admin_misc_event_types_update:
+    pattern: /admin/misc/event_types/{id}/update
+    defaults: { _controller: AdminBundle:EventType:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_misc_event_types_delete:
+    pattern: /admin/misc/event_types/{id}/delete
+    defaults: { _controller: AdminBundle:EventType:delete }
+    requirements:
+        id: \d+
+        _method: delete|post
+
+##################################### MISC HOUSE ROUTES ############################
+
+admin_misc_houses_index:
+    pattern: /admin/misc/houses
+    defaults: { _controller: AdminBundle:House:index }
+admin_misc_houses_show:
+    pattern: /admin/misc/houses/{id}/show
+    defaults: { _controller: AdminBundle:House:show }
+    requirements:
+        id: \d+
+admin_misc_houses_new:
+    pattern: /admin/misc/houses/new
+    defaults: { _controller: AdminBundle:House:new }
+admin_misc_houses_create:
+    pattern: /admin/misc/houses/create
+    defaults: { _controller: AdminBundle:House:create }
+    requirements:
+        _method: post
+admin_misc_houses_edit:
+    pattern: /admin/misc/houses/{id}/edit
+    defaults: { _controller: AdminBundle:House:edit }
+    requirements:
+        id: \d+
+admin_misc_houses_update:
+    pattern: /admin/misc/houses/{id}/update
+    defaults: { _controller: AdminBundle:House:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_misc_houses_delete:
+    pattern: /admin/misc/houses/{id}/delete
+    defaults: { _controller: AdminBundle:House:delete }
+    requirements:
+        id: \d+
+        _method: delete|post
+
+##################################### MISC ENCLOSURE ROUTES ############################
+
+
+admin_misc_enclosures_index:
+    pattern: /admin/misc/enclosures
+    defaults: { _controller: AdminBundle:Enclosure:index }
+admin_misc_enclosures_show:
+    pattern: /admin/misc/enclosures/{id}/show
+    defaults: { _controller: AdminBundle:Enclosure:show }
+    requirements:
+        id: \d+
+admin_misc_enclosures_new:
+    pattern: /admin/misc/enclosures/new
+    defaults: { _controller: AdminBundle:Enclosure:new }
+admin_misc_enclosures_create:
+    pattern: /admin/misc/enclosures/create
+    defaults: { _controller: AdminBundle:Enclosure:create }
+    requirements:
+        _method: post
+admin_misc_enclosures_edit:
+    pattern: /admin/misc/enclosures/{id}/edit
+    defaults: { _controller: AdminBundle:Enclosure:edit }
+    requirements:
+        id: \d+
+admin_misc_enclosures_update:
+    pattern: /admin/misc/enclosures/{id}/update
+    defaults: { _controller: AdminBundle:Enclosure:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_misc_enclosures_delete:
+    pattern: /admin/misc/enclosures/{id}/delete
+    defaults: { _controller: AdminBundle:Enclosure:delete }
+    requirements:
+        id: \d+
+        _method: delete|post
