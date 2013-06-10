@@ -1,0 +1,33 @@
+admin_basket_states_index:
+    pattern: /admin/basket-states
+    defaults: { _controller: AdminBundle:BasketState:index }
+admin_basket_states_show:
+    pattern: /admin/basket-states/{id}/show
+    defaults: { _controller: AdminBundle:BasketState:show }
+    requirements:
+        id: \d+
+admin_basket_states_new:
+    pattern: /admin/basket-states/new
+    defaults: { _controller: AdminBundle:BasketState:new }
+admin_basket_states_create:
+    pattern: /admin/basket-states/create
+    defaults: { _controller: AdminBundle:BasketState:create }
+    requirements:
+        _method: post
+admin_basket_states_edit:
+    pattern: /admin/basket-states/{id}/edit
+    defaults: { _controller: AdminBundle:BasketState:edit }
+    requirements:
+        id: \d+
+admin_basket_states_update:
+    pattern: /admin/basket-states/{id}/update
+    defaults: { _controller: AdminBundle:BasketState:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_basket_states_delete:
+    pattern: /admin/basket-states/{id}/delete
+    defaults: { _controller: AdminBundle:BasketState:delete }
+    requirements:
+        id: \d+
+        _method: delete|post

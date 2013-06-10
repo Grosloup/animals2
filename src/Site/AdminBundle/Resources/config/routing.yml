@@ -19,3 +19,6 @@ product_types:
 
 products:
     resource: "@AdminBundle/Resources/config/routes/product.yml"
+
+basket_states:
+    resource: "@AdminBundle/Resources/config/routes/basket-states.yml"

@@ -107,4 +107,9 @@ class BasketState
     {
         return $this->baskets;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

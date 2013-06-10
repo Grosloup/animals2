@@ -6,18 +6,18 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-                {{ breadcrumb.render("admin_products_edit")|raw }}
+                {{ breadcrumb.render("admin_basket_states_edit")|raw }}
             </div>
         </div>
         <div class="row">
             <div class="span12">
-                <h3 class="text-center">Produit "{{ entity.name }}"</h3>
+                <h3 class="text-center">Etat de commande "{{ entity.name }}"</h3>
             </div>
         </div>
         <div class="row">
 
             <div class="span6 offset3">
-                <form action="{{ path("admin_products_update",{"id":entity.id}) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+                <form action="{{ path("admin_basket_states_update",{"id":entity.id}) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
                     {{ form_widget(form) }}
                     <input type="hidden" name="_method" value="PUT" />
                     <div class="control-group info">
@@ -36,8 +36,8 @@
         </div>
         <div class="row">
             <div class="span6 offset3">
-                <h4>Supprimer ce produit</h4>
-                <form action="{{ path("admin_products_delete",{"id":entity.id}) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+                <h4>Supprimer cet état de commande</h4>
+                <form action="{{ path("admin_basket_states_delete",{"id":entity.id}) }}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
                     {{ form_widget(delete_form) }}
                     <input type="hidden" name="_method" value="DELETE" />
                     <button class="btn btn-danger">Supprimer "{{ entity.name }}"</button>

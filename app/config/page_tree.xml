@@ -18,4 +18,9 @@
     <page id="product_edit" title="Editer" parent="product"  route="admin_products_edit"/>
     <page id="product_show" title="Voir" parent="product"  route="admin_products_show"/>
 
+    <page id="basket_state" title="Etats de commande" parent="admin"  route="admin_basket_states_index"/>
+    <page id="basket_state_new" title="Ajouter" parent="basket_state"  route="admin_basket_states_new"/>
+    <page id="basket_state_edit" title="Editer" parent="basket_state"  route="admin_basket_states_edit"/>
+    <page id="basket_state_show" title="Voir" parent="basket_state"  route="admin_basket_states_show"/>
+
 </pages>
