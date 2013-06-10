@@ -8,6 +8,8 @@
 namespace Site\AdminBundle\Controller;
 
 
+use Site\AdminBundle\Entity\Species;
+use Site\AdminBundle\Form\SpeciesType;
 use Symfony\Component\HttpFoundation\Request;
 
 class SpeciesController extends BaseController implements CRUDInterface
@@ -15,36 +17,92 @@ class SpeciesController extends BaseController implements CRUDInterface
 
     public function indexAction()
     {
-        // TODO: Implement indexAction() method.
+        $entities = $this->getRepo("AdminBundle:Species")->findAll();
+        return $this->render("AdminBundle:Species:index.html.twig",["entities"=>$entities]);
     }
 
     public function showAction($id)
     {
-        // TODO: Implement showAction() method.
+        $entity = $this->findEntity($id);
+        return $this->render("AdminBundle:Species:show.html.twig",["entity"=>$entity]);
     }
 
     public function newAction()
     {
-        // TODO: Implement newAction() method.
+        $entity = new Species();
+        $form = $this->createForm(new SpeciesType(), $entity);
+        return $this->render("AdminBundle:Species:new.html.twig",["form"=>$form->createView()]);
     }
 
     public function createAction(Request $request)
     {
-        // TODO: Implement createAction() method.
+        $entity = new Species();
+        $form = $this->createForm(new SpeciesType(), $entity);
+        if($request->isMethod("POST")){
+            $form->submit($request);
+            if($form->isValid()){
+                $em = $this->getEm();
+                $em->persist($entity);
+                $em->flush();
+                return $this->redirect($this->generateUrl("admin_species_index"));
+            }
+        }
+        return $this->render("AdminBundle:Species:new.html.twig", ["form"=>$form->createView()]);
     }
 
     public function editAction($id)
     {
-        // TODO: Implement editAction() method.
+        $entity = $this->findEntity($id);
+        $form = $this->createForm(new SpeciesType(), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+        return $this->render("AdminBundle:Species:edit.html.twig", ["form"=>$form->createView(),"delete_form"=>$deleteForm->createView(), "entity"=>$entity]);
     }
 
     public function updateAction($id, Request $request)
     {
-        // TODO: Implement updateAction() method.
+        $entity = $this->findEntity($id);
+        $form = $this->createForm(new SpeciesType(), $entity);
+        $form->submit($request);
+        if($form->isValid()){
+            $em = $this->getEm();
+            $em->persist($entity);
+            $em->flush();
+            return $this->redirect($this->generateUrl("admin_species_index"));
+        }
+        $deleteForm = $this->createDeleteForm($id);
+        return $this->render("AdminBundle:Species:edit.html.twig", ["form"=>$form->createView(),"delete_form"=>$deleteForm->createView(), "entity"=>$entity]);
     }
 
     public function deleteAction($id, Request $request)
     {
-        // TODO: Implement deleteAction() method.
+        $form = $this->createDeleteForm($id);
+        $form->submit($request);
+
+        if ($form->isValid()) {
+            $em = $this->getEm();
+            $entity = $this->findEntity($id);
+
+            $em->remove($entity);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('admin_species_index'));
+    }
+
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder(array('id' => $id))
+            ->add('id', 'hidden')
+            ->getForm()
+            ;
+    }
+
+    private function findEntity($id)
+    {
+        $entity = $this->getRepo("AdminBundle:Species")->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Espèce ' . $id . ' introuvable.');
+        }
+        return $entity;
     }
 }
