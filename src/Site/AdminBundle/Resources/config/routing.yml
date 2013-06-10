@@ -13,3 +13,6 @@ animals:
 
 species:
     resource: "@AdminBundle/Resources/config/routes/species.yml"
+
+product_types:
+    resource: "@AdminBundle/Resources/config/routes/product-type.yml"

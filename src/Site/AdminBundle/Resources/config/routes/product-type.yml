@@ -1,0 +1,33 @@
+admin_product_types_index:
+    pattern: /admin/product-types
+    defaults: { _controller: AdminBundle:ProductType:index }
+admin_product_types_show:
+    pattern: /admin/product-types/{id}/show
+    defaults: { _controller: AdminBundle:ProductType:show }
+    requirements:
+        id: \d+
+admin_product_types_new:
+    pattern: /admin/product-types/new
+    defaults: { _controller: AdminBundle:ProductType:new }
+admin_product_types_create:
+    pattern: /admin/product-types/create
+    defaults: { _controller: AdminBundle:ProductType:create }
+    requirements:
+        _method: post
+admin_product_types_edit:
+    pattern: /admin/product-types/{id}/edit
+    defaults: { _controller: AdminBundle:ProductType:edit }
+    requirements:
+        id: \d+
+admin_product_types_update:
+    pattern: /admin/product-types/{id}/update
+    defaults: { _controller: AdminBundle:ProductType:update }
+    requirements:
+        id: \d+
+        _method: put|post
+admin_product_types_delete:
+    pattern: /admin/product-types/{id}/delete
+    defaults: { _controller: AdminBundle:ProductType:delete }
+    requirements:
+        id: \d+
+        _method: delete|post

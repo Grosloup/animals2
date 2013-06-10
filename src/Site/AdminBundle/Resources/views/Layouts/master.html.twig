@@ -74,6 +74,21 @@
                         </ul>
                     </li>
                     <li class="dropdown">
+                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path("admin_users_index") }}">Commandes</a></li>
+                            <li><a href="{{  path("admin_users_new") }}">Créer une commande</a></li>
+                            <li><a href="{{  path("admin_users_new") }}">Commandes en cours</a></li>
+                            <li><a href="{{  path("admin_users_new") }}">Archives des commandes</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{  path("admin_users_new") }}">Liste des produits</a></li>
+                            <li><a href="{{  path("admin_users_new") }}">Ajouter un produit</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{  path("admin_product_types_index") }}">Types de produit</a></li>
+                            <li><a href="{{  path("admin_product_types_new") }}">Ajouter un type de produit</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
                         <a id="drop2" href="{{ path("admin_misc_homepage") }}" class="dropdown-toggle" data-toggle="dropdown">Divers <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path("admin_misc_homepage") }}#colors">Couleurs</a></li>
@@ -83,8 +98,6 @@
                             <li><a href="{{ path("admin_misc_homepage") }}#iucn">IUCN</a></li>
                             <li><a href="{{ path("admin_misc_homepage") }}#sexes">Sexes</a></li>
                             <li><a href="{{ path("admin_misc_homepage") }}#status">Status</a></li>
-                            <li><a href="{{ path("admin_misc_homepage") }}#weights">Poids</a></li>
-
                         </ul>
                     </li>
                 </ul>
