@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
     <page id="admin" title="Admin" route="admin_homepage" parent="null"/>
+
     <page id="user" parent="admin" route="admin_users_index" title="Utilisateur"/>
-    <page id="user_create" parent="user" route="admin_users_new" title="Ajout Utilisateur"/>
+    <page id="user_new" parent="user" route="admin_users_new" title="Ajouter"/>
+    <page id="user_edit" title="Editer" route="admin_users_edit" parent="user"/>
+    <page id="user_show" title="Voir" route="admin_users_show" parent="user"/>
+    <page id="user_promote_demote" title="Promouvoir/Rétrograder" route="admin_users_promote_demote" parent="user"/>
+
+    <page id="product_type" title="Types de produit" route="admin_product_types_index" parent="admin"/>
+    <page id="product_type_new" title="Ajouter" route="admin_product_types_new" parent="product_type"/>
+    <page id="product_type_edit" title="Editer" route="admin_product_types_edit" parent="product_type"/>
+    <page id="product_type_show" title="Voir" route="admin_product_types_show" parent="product_type"/>
 </pages>

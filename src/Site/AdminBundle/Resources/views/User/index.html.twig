@@ -5,6 +5,11 @@
     <div class="container">
         <div class="row">
             <div class="span12">
+                {{ breadcrumb.render("admin_users_index")|raw }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
                 <h3>Gestion des utilisateurs</h3>
                 <p><a href="{{ path("admin_users_new") }}">Enregistrer un nouvel utilisateur <i class="icon-chevron-right"></i></a></p>
                 {% if entities|length > 0 %}

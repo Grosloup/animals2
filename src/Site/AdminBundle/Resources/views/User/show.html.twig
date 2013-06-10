@@ -4,6 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="span12">
+            {{ breadcrumb.render("admin_users_show")|raw }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
             <h3 class="text-center">Utilisateur "{{ entity.username }}"</h3>
         </div>
     </div>

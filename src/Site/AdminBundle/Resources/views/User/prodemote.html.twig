@@ -5,6 +5,11 @@
     <div class="container">
         <div class="row">
             <div class="span12">
+                {{ breadcrumb.render("admin_users_promote_demote")|raw }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
                 <h3>Promouvoir/Rétrograder {{ entity.username }}</h3>
                 {% if entity.isAdmin %}
                     <p>Actuellement {{ entity.username }} est Administrateur</p>
