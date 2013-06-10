@@ -8,4 +8,6 @@ services:
 #        arguments: [@service_id, "plain_value", %parameter%]
     front.controller.exception:
         class: %front.controller.exception.class%
-        arguments: [@twig, %kernel.debug%]
+        arguments: ["@twig", %kernel.debug%]
+        calls:
+            - [ setContainer, ["@service_container"]]

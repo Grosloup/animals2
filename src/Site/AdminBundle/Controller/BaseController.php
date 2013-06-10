@@ -34,4 +34,9 @@ class BaseController extends Controller
     {
         return $this->get("security.context")->isGranted($role);
     }
+
+    protected function getRoute()
+    {
+        return $this->container->get("request")->attributes->get("_route");
+    }
 }

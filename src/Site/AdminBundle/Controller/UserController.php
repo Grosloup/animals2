@@ -19,6 +19,7 @@ class UserController extends BaseController implements CRUDInterface
 
     public function indexAction()
     {
+
         $entities = $this->getRepo("AdminBundle:User")->findAll();
         return $this->render("AdminBundle:User:index.html.twig",["entities"=>$entities]);
     }
@@ -72,7 +73,6 @@ class UserController extends BaseController implements CRUDInterface
 
     public function updateAction($id, Request $request)
     {
-        $em = $this->getEm();
         $entity = $this->findUser($id);
         $form = $this->createForm(new EditUserType(), $entity);
         $form->submit($request);

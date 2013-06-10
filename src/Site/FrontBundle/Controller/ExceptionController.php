@@ -8,13 +8,20 @@
 namespace Site\FrontBundle\Controller;
 
 use Symfony\Bundle\TwigBundle\Controller\ExceptionController as ExController;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
-class ExceptionController extends ExController
+class ExceptionController extends ExController implements ContainerAwareInterface
 {
     public $exceptionClass;
+
+    /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    protected $container;
 
     public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null, $format = 'html')
     {
@@ -34,4 +41,17 @@ class ExceptionController extends ExController
         return parent::findTemplate($request, $format, $code, $debug);
     }
 
+    /**
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container A ContainerInterface instance or null
+     *
+     * @return $this
+     * @api
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+        return $this;
+    }
 }
