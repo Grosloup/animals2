@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="span12">
-            <h3>Gestion des espèces</h3>
+            <h3>Gestion des Type de produit</h3>
             <p><a href="{{ path("admin_product_types_new") }}">Enregistrer un nouveau type de produit <i class="icon-chevron-right"></i></a></p>
 
             {% if entities|length > 0 %}
@@ -13,6 +13,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nom</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -20,6 +21,7 @@
                         <tr>
                             <td>{{ entity.id }}</td>
                             <td>{{ entity.name }}</td>
+                            <td><a href="{{ path("admin_product_types_show", {"id":entity.id}) }}">Voir</a> | <a href="{{ path("admin_product_types_edit", {"id":entity.id}) }}">Editer</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
