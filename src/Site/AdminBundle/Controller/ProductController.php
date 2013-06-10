@@ -15,7 +15,8 @@ class ProductController extends BaseController implements CRUDInterface
 {
     public function indexAction()
     {
-        $entities = $this->getRepo("AdminBundle:Product")->findAll();
+        $entities = $this->getRepo("AdminBundle:Product")->findAllAndOrderByType();
+
         return $this->render("AdminBundle:Product:index.html.twig",["entities"=>$entities]);
     }
 

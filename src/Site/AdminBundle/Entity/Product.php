@@ -2,6 +2,7 @@
 
 namespace Site\AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +56,19 @@ class Product
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Site\AdminBundle\Entity\Basket", mappedBy="baskets")
+     */
+    private $baskets;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->baskets = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -202,5 +216,38 @@ class Product
         $this->description = $description;
 
         return $this;
+    }
+
+    /**
+     * Add baskets
+     *
+     * @param Basket $baskets
+     * @return Product
+     */
+    public function addBasket(Basket $baskets)
+    {
+        $this->baskets[] = $baskets;
+
+        return $this;
+    }
+
+    /**
+     * Remove baskets
+     *
+     * @param Basket $baskets
+     */
+    public function removeBasket(Basket $baskets)
+    {
+        $this->baskets->removeElement($baskets);
+    }
+
+    /**
+     * Get baskets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBaskets()
+    {
+        return $this->baskets;
     }
 }
