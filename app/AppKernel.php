@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Site\AdminBundle\AdminBundle(),
             new Site\FrontBundle\FrontBundle(),
             new Site\BreadCrumbBundle\BreadCrumbBundle(),
+            new Site\AngularBundle\AngularBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

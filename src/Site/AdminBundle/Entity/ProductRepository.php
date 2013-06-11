@@ -16,4 +16,9 @@ class ProductRepository extends EntityRepository
     {
         return $this->createQueryBuilder('p')->orderBy('p.type','ASC')->getQuery()->getResult();
     }
+
+    public function FindAllToArray()
+    {
+        return $this->createQueryBuilder('p')->orderBy('p.type','ASC')->getQuery()->getArrayResult();
+    }
 }

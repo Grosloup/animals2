@@ -1,0 +1,27 @@
+{% extends "AngularBundle:Layouts:master.html.twig" %}
+
+{% block body %}
+    <div class="container" ng-controller="MainCtrl">
+        <div class="row">
+            <div class="span12">
+                <ul>
+                    <li ng-repeat="item in items">{[{item.id}]} - {[{ item.name }]} <input type="text" size="3" name="quantity-{[{item.slug}]}" id="" ng-model="basket[$index].quantity"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <ul>
+                    <li ng-repeat="item in items">{[{item.id}]} - {[{ item.name }]} <input type="text" name="quantity-{[{item.slug}]}" id="" ng-model="basket[$index].quantity"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footscripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="/js/vendor/angular.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/js/apps/test1.js"></script>
+{% endblock %}

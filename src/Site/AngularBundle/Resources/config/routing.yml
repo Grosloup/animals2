@@ -1,0 +1,12 @@
+angular_homepage:
+    pattern:  /angular
+    defaults: { _controller: AngularBundle:Default:index }
+angular_test1:
+    pattern: /api/testing
+    defaults: { _controller: AngularBundle:Angular:index }
+angular_test2:
+    pattern: /api/testing/{id}
+    defaults: { _controller: AngularBundle:Angular:show }
+    requirements:
+        id: \d+
+        _method: put

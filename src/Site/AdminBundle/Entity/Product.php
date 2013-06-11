@@ -4,6 +4,7 @@ namespace Site\AdminBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Product
@@ -61,6 +62,12 @@ class Product
      * @ORM\ManyToMany(targetEntity="Site\AdminBundle\Entity\Basket", mappedBy="baskets")
      */
     private $baskets;
+
+    /**
+     * @ORM\Column(name="slug", type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private $slug;
 
     /**
      * Constructor
@@ -249,5 +256,28 @@ class Product
     public function getBaskets()
     {
         return $this->baskets;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Product
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
